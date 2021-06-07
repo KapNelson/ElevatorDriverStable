@@ -7,11 +7,14 @@
     <groupId>com.sytoss.edu2021</groupId>
     <artifactId>ElevatorDriver</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
 
     <modules>
         <module>api-engine</module>
         <module>api-cabin</module>
+        <module>api-admin</module>
+        <module>api-floor</module>
+        <module>srv-config</module>
     </modules>
 
     <properties>
