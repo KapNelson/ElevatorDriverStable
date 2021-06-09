@@ -11,14 +11,7 @@
     </parent>
 
 
-    <artifactId>api-admin</artifactId>
+    <artifactId>api-common</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.sytoss.edu2021</groupId>
-            <artifactId>api-common</artifactId>
-            <version>0.0.3-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>

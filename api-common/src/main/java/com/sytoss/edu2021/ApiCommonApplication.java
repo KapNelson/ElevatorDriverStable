@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiCabinApplication {
+public class ApiCommonApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ApiCabinApplication.class, args);
+        SpringApplication.run(ApiCommonApplication.class, args);
     }
 }
