@@ -14,6 +14,7 @@ public class Floor {
     @Getter
     @Setter
     private boolean buttonDown;
+    @Getter
     private boolean hasCabinOnFloor;
 
     public Floor(int numberOfFloor, Cabin pCabin) {
@@ -33,7 +34,6 @@ public class Floor {
     public String displayCabinInfo(){
         return cabin.displayCabinInfo();
     }
-
 
     public void callToUp() {
         buttonUp = true;

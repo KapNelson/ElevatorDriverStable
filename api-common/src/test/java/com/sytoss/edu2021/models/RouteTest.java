@@ -1,7 +1,5 @@
-package com.sytoss.edu2021.model;
+package com.sytoss.edu2021.models;
 
-import com.sytoss.edu2021.models.Direction;
-import com.sytoss.edu2021.models.Route;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
