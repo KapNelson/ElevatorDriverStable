@@ -1,38 +1,34 @@
 package com.sytoss.edu2021.contollers;
 
-//import com.sytoss.edu2021.models.Cabin;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Arrays;
-import java.util.Collections;
+import com.sytoss.edu2021.repo.dto.CabinBOM;
+import com.sytoss.edu2021.services.CabinService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
+@RequestMapping("/api/cabin_floor/cabin")
 public class CabinController {
 
-/*    private final Cabin cabin = new Cabin(-3, 12);
 
-    @GetMapping("/")
-    public String cabinInterfaceLogic(Model model) {
+   @Autowired
+   private CabinService cabinService;
 
-        Arrays.sort(cabin.getFloorButtons(), Collections.reverseOrder());
-        model.addAttribute("title", "Cabin Interface");
-        model.addAttribute("buttonsList", cabin.getFloorButtons());
-        model.addAttribute("dir", cabin.getRoute().getDirection());
-        model.addAttribute("stopsList", cabin.getRoute().getQueueOfFloors());
 
-        return "cabin";
+    @GetMapping("/call/{buildingId}/{cabinNumber}/{floor}")
+    public CabinBOM callToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int floor) {
+        return cabinService.callToFloor(buildingId,cabinNumber,floor);
     }
 
+    @GetMapping("/gotofloor/{buildingId}/{cabinNumber}/{toFloor}")
+    public CabinBOM goToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int toFloor) {
+        return cabinService.goToFloor(buildingId,cabinNumber,toFloor);
+    }
 
-    @PostMapping("/addFloor")
-    public String processForm(@RequestParam(name = "newFloor") Integer floor) {
-        cabin.addFloorToStop(floor);
-        return "redirect:/";
-    }*/
+    @GetMapping("/send/message/{idCabin}")
+    public String sendMessage(@PathVariable int idCabin){
+        return cabinService.sendMessage(idCabin);
+    }
+
 
 }

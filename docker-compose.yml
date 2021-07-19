@@ -1,46 +1,61 @@
 version: "2.3"
 services:
-  api-admin:
-    image: api-admin:latest
-    container_name: api-admin
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
     environment:
-      - APP_ENV=local-docker
-    ports:
-      - "16060:6060"
-  api-cabin:
-    image: api-cabin:latest
-    container_name: api-cabin
-    environment:
-      - APP_ENV=local-docker
-    ports:
-      - "16070:6070"
-  api-common:
-    image: api-common:latest
-    container_name: api-common
-    environment:
-      - APP_ENV=local-docker
-    ports:
-      - "16080:6080"
-  api-engine:
-    image: api-engine:latest
-    container_name: api-engine
-    environment:
-      - APP_ENV=local-docker
-    ports:
-      - "16010:6010"
-  srv-config:
-    image: srv-config:latest
-    container_name: srv-config
-    environment:
-      - APP_ENV=local-docker
-    ports:
-      - "16002:6002"
-  mysql:
-    image: mysql:latest
-    container_name: mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=qa123Z45
-      - MYSQL_ALLOW_EMPTY_PASSWORD=Y
-      - MYSQL_RANDOM_ROOT_PASSWORD=N
+      - MYSQL_ROOT_PASSWORD=admin123
     ports:
       - "13306:3306"
+    volumes:
+      - "/DevEnv/Compilers/ElevatorDriver/mysql_data:/var/lib/mysql"
+
+  srv-config:
+    image: edu2021/srv-config:latest
+    container_name: srv-config
+    environment:
+      - APP_ENV=dev
+    ports:
+      - "16002:6002"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1:6002/actuator/health" ]
+      timeout: 10s
+      retries: 3
+    depends_on:
+      mariadb:
+        condition: service_started
+
+  api-admin:
+    image: edu2021/api-admin:latest
+    container_name: api-admin
+    environment:
+      - APP_ENV=dev
+      - config.server.path=http://srv-config:6002
+    ports:
+      - "16060:6060"
+      - "17010:7010"
+    depends_on:
+      srv-config:
+        condition: service_healthy
+
+  api-cabin-floor:
+    image: edu2021/api-cabin-floor:latest
+    container_name: api-cabin-floor
+    environment:
+      - config.server.path=http://srv-config:6002
+    ports:
+      - "16070:6070"
+    depends_on:
+      srv-config:
+       condition: service_healthy
+
+  api-engine:
+    image: edu2021/api-engine:latest
+    container_name: api-engine
+    environment:
+      - config.server.path=http://srv-config:6002
+    ports:
+      - "16050:6050"
+    depends_on:
+      srv-config:
+       condition: service_healthy

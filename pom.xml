@@ -14,7 +14,7 @@
     <groupId>com.sytoss.edu2021</groupId>
     <artifactId>ElevatorDriver</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
 
     <modules>
         <module>srv-config</module>
@@ -90,16 +90,15 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
-
     </dependencies>
 
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>

@@ -7,20 +7,25 @@
     <parent>
         <artifactId>ElevatorDriver</artifactId>
         <groupId>com.sytoss.edu2021</groupId>
-        <version>0.0.5-SNAPSHOT</version>
+        <version>0.0.6-SNAPSHOT</version>
     </parent>
 
 
     <artifactId>api-admin</artifactId>
 
+
+
+
     <dependencies>
         <dependency>
             <groupId>com.sytoss.edu2021</groupId>
             <artifactId>api-common</artifactId>
-            <version>0.0.5-SNAPSHOT</version>
+            <version>0.0.6-SNAPSHOT</version>
         </dependency>
 
-       <!-- MySQL-->
+
+
+           <!-- MySQL-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -28,8 +33,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.25</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -44,7 +50,49 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
+    <build>
+        <finalName>api-admin</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.36.0</version>
+
+                <configuration>
+                   <!-- <dockerFile>./Dockerfile</dockerFile>-->
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
