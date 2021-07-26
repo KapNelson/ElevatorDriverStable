@@ -1,14 +1,18 @@
 package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity(name = "app_cabin")
 @ToString
+@NoArgsConstructor
 public class CabinDTO {
     @Id
     @Column(name = "id_cabin")
@@ -20,19 +24,14 @@ public class CabinDTO {
     @Getter
     @Setter
     private int number;
-    @ManyToOne
-    @JoinColumn(name = "id_build")
+
     @Getter
     @Setter
-    private BuildingDTO building;
+    @Column(name = "id_building")
+    private int buildingId;
 
-    public CabinDTO(int number, BuildingDTO building) {
+
+    public CabinDTO(int number) {
         this.number = number;
-        this.building = building;
     }
-
-    public CabinDTO() {
-
-    }
-
 }
