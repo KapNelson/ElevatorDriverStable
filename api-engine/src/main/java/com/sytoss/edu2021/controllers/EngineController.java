@@ -17,40 +17,24 @@ public class EngineController {
     private EngineService engineService;
     @Autowired
     private RouteService routeService;
-/*
-    @GetMapping("/{idCabin}")
-    public EngineBOM create(@PathVariable Integer idCabin){
-        return engineService.create(idCabin);
-    }
-
-    @PostMapping ("/engines/")
-    public EngineBOM[] getEngines(@RequestBody Integer[] ids){
-        return engineService.getEngines(ids);
-    }
-
-    @GetMapping ("/get/{buildingId}/{cabinNo}")
-    public EngineBOM getEngine(@PathVariable Integer idCabin){
-        return engineService.getEngine(idCabin);
-    }
-  
-    @PostMapping("/update")
-    public void update(@RequestBody EngineBOM engine){
-        engineService.update(engine);
-    }
-
-    @GetMapping("/start_move/{cabinId}")
-    public EngineBOM goToFloor(@RequestBody Integer cabinId) {
-        return engineService.goToFloor(cabinId);
-    }*/
-
 
     @PostMapping("/add/{buildingId}/{cabinId}")
-    public EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
+    private EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
         return engineService.addEngine(buildingId,cabinId);
     }
 
     @PostMapping("/add/route/{buildingId}/{cabinNumber}/{floorNumber}")
-    RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
+    public RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
         return routeService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
+    }
+
+    @PostMapping("/start/{buildingId}/{cabinNumber}")
+    public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
+        engineService.startMovement(buildingId,cabinNumber);
+    }
+
+    @GetMapping ("/get/{engineId}")
+    public EngineBOM getEngine(@PathVariable Integer engineId){
+        return engineService.getEngine(engineId);
     }
 }
