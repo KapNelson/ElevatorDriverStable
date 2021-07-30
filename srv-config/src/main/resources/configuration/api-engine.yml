@@ -5,11 +5,16 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/api_engine
-    username: root
-    password: admin123
+    url: jdbc:mongodb://localhost:27017/api_engine
   liquibase:
     enabled: true
     change-log: classpath:/db/db.changelog.xml
     default-schema: api_engine
-
+waitingStrategy:
+  #type: Possible Values: JobQuartz, FutureTask
+  type: JobQuartz
+  time: 5000
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
